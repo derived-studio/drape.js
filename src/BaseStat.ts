@@ -1,0 +1,23 @@
+export type BaseStatData = {
+    code: string
+    name: string
+    base?: number
+}
+
+export abstract class BaseStat {
+    code: string
+    name: string
+    base: number
+
+    constructor({
+        code, name, base
+    }: BaseStatData) {
+        this.code = code
+        this.name = name
+        this.base = base
+    }
+
+    public get value(): number {
+        return this.base
+    }
+}
