@@ -3,7 +3,6 @@ export type BaseStatData = {
     name: string
     base?: number
 }
-
 export abstract class BaseStat {
     code: string
     name: string
@@ -14,7 +13,7 @@ export abstract class BaseStat {
     }: BaseStatData) {
         this.code = code
         this.name = name
-        this.base = base
+        this.base = base || 0
     }
 
     public get value(): number {
