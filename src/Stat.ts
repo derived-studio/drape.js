@@ -51,4 +51,9 @@ export class Stat extends BaseStat {
             this._modList.filter(mod => mod.code != modifier.code)
         }
     }
+
+    public getModifierCount(modifier: Modifier | string): number {
+        const code = modifier instanceof Modifier ? modifier.code : modifier
+        return this._modCounter[code] || 0
+    }
 }
