@@ -12,6 +12,11 @@ export class Stat extends BaseStat {
         super(props)
     }
 
+    public static TYPE = 'Stat'
+    public get typeName(): string {
+        return Stat.TYPE
+    }
+
     public get modifiers(): Array<Partial<ModifierData>> {
         return this._modList.map(mod => ({ ...mod }))
     }

@@ -12,9 +12,14 @@ const mockStatData = (overrides = {}): StatData => ({
 
 describe('Stat', () => {
 
+    it('should return correct type name', () => {
+        const stat = new Stat(mockStatData())
+        expect(stat.typeName).toBe(Stat.TYPE)
+    })
+
     it('should extend base stat', () => {
-        const mod = new Stat(mockStatData())
-        expect(mod).toBeInstanceOf(BaseStat)
+        const stat = new Stat(mockStatData())
+        expect(stat).toBeInstanceOf(BaseStat)
     })
 
     it('should return value as base', () => {

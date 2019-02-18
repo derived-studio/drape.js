@@ -8,6 +8,8 @@ export abstract class BaseStat {
     name: string
     base: number
 
+    public abstract get typeName(): string
+
     constructor({
         code, name, base
     }: BaseStatData) {

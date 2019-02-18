@@ -11,6 +11,11 @@ export const mockModifierData = (overrides: Partial<ModifierData> = {}): Modifie
 })
 
 describe('Modifier', () => {
+    it('should return correct type name', () => {
+        const mod = new Modifier(mockModifierData())
+        expect(mod.typeName).toBe(Modifier.TYPE)
+    })
+
     it('should extend base stat', () => {
         const mod = new Modifier(mockModifierData())
         expect(mod).toBeInstanceOf(BaseStat)
@@ -35,5 +40,4 @@ describe('Modifier', () => {
         expect(mod.base).toBe(0)
         expect(mod.factor).toBe(0)
     })
-
 })
