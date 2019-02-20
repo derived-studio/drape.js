@@ -22,11 +22,7 @@ export class Stat extends BaseStat {
     }
 
     public get value(): number {
-        const { baseSum, factorSum } = this._modList.reduce(({ baseSum, factorSum }, curr: Modifier) => ({
-            baseSum: baseSum + curr.base * this._modCounter[curr.code],
-            factorSum: factorSum + curr.factor * this._modCounter[curr.code]
-        }), { baseSum: 0, factorSum: 0 })
-        return (this.base + baseSum) * (1 + factorSum)
+        return this._value
     }
 
     public apply(modifier: Modifier) {
@@ -45,6 +41,8 @@ export class Stat extends BaseStat {
         }
 
         this._modCounter[modifier.code] = count + 1
+
+        this.updateCachedValue()
     }
 
     public remove(modifier: Modifier) {
@@ -55,10 +53,20 @@ export class Stat extends BaseStat {
         if (this._modCounter[modifier.code] <= 0) {
             this._modList.filter(mod => mod.code != modifier.code)
         }
+
+        this.updateCachedValue()
     }
 
     public getModifierCount(modifier: Modifier | string): number {
         const code = modifier instanceof Modifier ? modifier.code : modifier
         return this._modCounter[code] || 0
+    }
+
+    private updateCachedValue(): void {
+        const { baseSum, factorSum } = this._modList.reduce(({ baseSum, factorSum }, curr: Modifier) => ({
+            baseSum: baseSum + curr.base * this._modCounter[curr.code],
+            factorSum: factorSum + curr.factor * this._modCounter[curr.code]
+        }), { baseSum: 0, factorSum: 0 })
+        this._value = (this.base + baseSum) * (1 + factorSum)
     }
 }
