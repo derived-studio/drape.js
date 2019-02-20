@@ -1,8 +1,13 @@
+import slugify from 'slugify'
 import { IStat } from "../interfaces";
 
+slugify.extend({
+    '+': 'plus'
+})
+
 export type BaseStatData = {
-    code: string
     name: string
+    code?: string
     base?: number
 }
 export abstract class BaseStat implements IStat {
@@ -18,7 +23,7 @@ export abstract class BaseStat implements IStat {
     constructor({
         code, name, base = 0
     }: BaseStatData) {
-        this.code = code
+        this.code = code || slugify(name).toLowerCase()
         this.name = name
         this.base = base
         this._value = base

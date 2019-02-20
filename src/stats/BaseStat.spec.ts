@@ -44,4 +44,21 @@ describe('BaseStat', () => {
         expect(stat.base).toBe(0)
         expect(stat.value).toBe(0)
     })
+
+    it('should generate code slug from name', () => {
+        const stat1 = new TestStat({ name: 'Some test stat 1' })
+        expect(stat1.code).toBe('some-test-stat-1')
+
+        const stat2 = new TestStat({ name: 'damage & growth' })
+        expect(stat2.code).toBe('damage-and-growth')
+
+        const stat3 = new TestStat({ name: 'growth 10% boost' })
+        expect(stat3.code).toBe('growth-10percent-boost')
+
+        const stat4 = new TestStat({ name: 'doom---and---gloom' })
+        expect(stat4.code).toBe('doom-and-gloom')
+
+        const stat5 = new TestStat({ name: 'speed +1' })
+        expect(stat5.code).toBe('speed-plus1')
+    })
 })
