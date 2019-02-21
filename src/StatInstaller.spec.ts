@@ -1,6 +1,6 @@
 import { StatInstaller } from "./StatInstaller";
 import { BaseStat, BaseStatData } from "./stats/BaseStat";
-import { Registry } from "./Rregistry";
+import { Registry } from "./Registry";
 
 class TestStat extends BaseStat {
     readonly typeName = 'MockStat'

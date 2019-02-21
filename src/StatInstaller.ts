@@ -1,5 +1,5 @@
 import { IStatInstaller, IStat } from "./interfaces";
-import { Registry } from "./Rregistry";
+import { Registry } from "./Registry";
 import { BaseStatData } from "./stats/BaseStat";
 
 export class StatInstaller<TStat extends IStat, TStatData extends BaseStatData> implements IStatInstaller {

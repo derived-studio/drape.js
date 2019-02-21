@@ -4,6 +4,8 @@ export class Registry implements IRegistry {
     private _stats: { [code: string]: IStat } = {}
     private _typeDict: { [typeName: string]: Set<string> } = {}
 
+    get statCount(): number { return Object.keys(this._stats).length }
+
     add(stat: IStat) {
         const { _stats, _typeDict } = this
 

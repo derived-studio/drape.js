@@ -1,6 +1,5 @@
-import { Registry } from './Rregistry';
+import { Registry } from './Registry';
 import { IStatInstaller, IRegistryFactory } from './interfaces';
-import { StatInstaller } from './StatInstaller';
 
 export class RegistryFactory implements IRegistryFactory {
     readonly _installers: ReadonlyArray<IStatInstaller>
