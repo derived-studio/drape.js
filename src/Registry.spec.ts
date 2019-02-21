@@ -31,11 +31,12 @@ describe('Registry', () => {
 
     it('should allow to get added stats', () => {
         const registry = new Registry()
+
         const statData = { name: 'stat 1', code: 'stat-one', base: 1, info: 'stat with code' }
         registry.add(new TestStat(statData))
-        const stat = registry.get('stat-one') as TestStat
-
         expect(registry.statCount).toBe(1)
+
+        const stat = registry.get('stat-one') as TestStat
         expect(stat.name).toBe(statData.name)
         expect(stat.code).toBe(statData.code)
         expect(stat.info).toBe(statData.info)
