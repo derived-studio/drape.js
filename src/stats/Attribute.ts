@@ -1,20 +1,20 @@
 import { BaseStatData, BaseStat } from "./BaseStat";
 import { Modifier, ModifierData } from "./Modifier";
 
-export type StatData = BaseStatData & {
+export type AttributeData = BaseStatData & {
 }
 
-export class Stat extends BaseStat {
+export class Attribute extends BaseStat {
     private _modList: Modifier[] = []
     private _modCounter: { [key: string]: number } = {}
 
-    constructor(props: StatData) {
+    constructor(props: AttributeData) {
         super(props)
     }
 
     public static TYPE = 'Stat'
     public get typeName(): string {
-        return Stat.TYPE
+        return Attribute.TYPE
     }
 
     public get modifiers(): Array<Partial<ModifierData>> {

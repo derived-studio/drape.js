@@ -1,30 +1,30 @@
-import { Stat, StatData } from './Stat'
+import { Attribute, AttributeData } from './Attribute'
 import { BaseStat } from './BaseStat';
 import { Modifier } from './Modifier';
 import { mockModifierData } from './Modifier.spec';
 
-const mockStatData = (overrides = {}): StatData => ({
+const mockStatData = (overrides = {}): AttributeData => ({
     name: 'Test stat',
     code: 'test-stat',
     base: 123,
     ...overrides
-} as StatData)
+} as AttributeData)
 
 describe('Stat', () => {
 
     it('should return correct type name', () => {
-        const stat = new Stat(mockStatData())
-        expect(stat.typeName).toBe(Stat.TYPE)
+        const stat = new Attribute(mockStatData())
+        expect(stat.typeName).toBe(Attribute.TYPE)
     })
 
     it('should extend base stat', () => {
-        const stat = new Stat(mockStatData())
+        const stat = new Attribute(mockStatData())
         expect(stat).toBeInstanceOf(BaseStat)
     })
 
     it('should return value as base', () => {
         const data = mockStatData({ base: 101 });
-        const stat = new Stat(data)
+        const stat = new Attribute(data)
         expect(stat.base).toBe(101)
     })
 
@@ -37,7 +37,7 @@ describe('Stat', () => {
             }))
 
             const statData = mockStatData({ base: 1 })
-            const stat = new Stat(statData)
+            const stat = new Attribute(statData)
 
             stat.apply(modifier)
             stat.apply(modifier)
@@ -46,7 +46,7 @@ describe('Stat', () => {
 
         it(`should apply bounded modifier for matching string bounds`, () => {
             const statData = mockStatData({ code: 'test-stat' })
-            const stat = new Stat(statData)
+            const stat = new Attribute(statData)
 
             const modifier = new Modifier(mockModifierData({
                 code: 'test-modifier',
@@ -59,7 +59,7 @@ describe('Stat', () => {
 
         it(`should apply bounded modifiers if match exists within bounds array`, () => {
             const statData = mockStatData({ code: 'test-stat' })
-            const stat = new Stat(statData)
+            const stat = new Attribute(statData)
 
             const modifier = new Modifier(mockModifierData({
                 code: 'test-modifier',
@@ -78,7 +78,7 @@ describe('Stat', () => {
             }))
 
             const statData = mockStatData({ code: 'stat-code', base: 1 })
-            const stat = new Stat(statData)
+            const stat = new Attribute(statData)
 
             expect(() => stat.apply(modifier)).toThrowError()
             expect(stat.value).toBe(1)
