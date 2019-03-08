@@ -1,7 +1,6 @@
 import { BaseStatData, BaseStat } from "./BaseStat";
 
 export type ModifierData = BaseStatData & {
-    base?: number
     factor?: number
     bounds?: string | string[]
     limit?: number
