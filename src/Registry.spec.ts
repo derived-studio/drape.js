@@ -2,56 +2,56 @@ import { BaseStatData, BaseStat } from "./stats/BaseStat";
 import { Registry } from "./Registry";
 
 export type TestStatData = BaseStatData & {
-    info: string
+  info: string
 }
 
 export class TestStat extends BaseStat {
-    static TYPE = 'TestStat'
-    get typeName() { return TestStat.TYPE }
+  static TYPE = 'TestStat'
+  get typeName() { return TestStat.TYPE }
 
-    info: string = ''
+  info: string = ''
 
-    constructor(props: TestStatData) {
-        super(props)
-        this.info = props.info
-    }
+  constructor(props: TestStatData) {
+    super(props)
+    this.info = props.info
+  }
 }
 
 export const testStatData: TestStatData[] = [
-    { name: 'stat 1', code: 'stat-one', base: 1, info: 'stat with code' },
-    { name: 'stat 2', base: 1, info: 'stat with code auto generated' }
+  { name: 'stat 1', code: 'stat-one', base: 1, info: 'stat with code' },
+  { name: 'stat 2', base: 1, info: 'stat with code auto generated' }
 ]
 
 describe('Registry', () => {
 
-    it('should create empty registry', () => {
-        const registry = new Registry()
-        expect(registry.statCount).toBe(0)
-    })
+  it('should create empty registry', () => {
+    const registry = new Registry()
+    expect(registry.statCount).toBe(0)
+  })
 
-    it('should allow to get added stats', () => {
-        const registry = new Registry()
+  it('should allow to get added stats', () => {
+    const registry = new Registry()
 
-        const statData = { name: 'stat 1', code: 'stat-one', base: 1, info: 'stat with code' }
-        registry.add(new TestStat(statData))
-        expect(registry.statCount).toBe(1)
+    const statData = { name: 'stat 1', code: 'stat-one', base: 1, info: 'stat with code' }
+    registry.add(new TestStat(statData))
+    expect(registry.statCount).toBe(1)
 
-        const stat = registry.get('stat-one') as TestStat
-        expect(stat.name).toBe(statData.name)
-        expect(stat.code).toBe(statData.code)
-        expect(stat.info).toBe(statData.info)
-        expect(stat.value).toBe(statData.base)
-    })
+    const stat = registry.get('stat-one') as TestStat
+    expect(stat.name).toBe(statData.name)
+    expect(stat.code).toBe(statData.code)
+    expect(stat.info).toBe(statData.info)
+    expect(stat.value).toBe(statData.base)
+  })
 
-    it('should allow to get stats by type', () => {
-        const registry = new Registry()
-        for (let statData of testStatData) {
-            registry.add(new TestStat(statData))
-        }
+  it('should allow to get stats by type', () => {
+    const registry = new Registry()
+    for (let statData of testStatData) {
+      registry.add(new TestStat(statData))
+    }
 
-        expect(registry.statCount).toBe(2)
-        const stats: TestStat[] = registry.getByType(TestStat.TYPE) as TestStat[]
-        expect(stats).toHaveLength(2)
-    })
+    expect(registry.statCount).toBe(2)
+    const stats: TestStat[] = registry.getByType(TestStat.TYPE) as TestStat[]
+    expect(stats).toHaveLength(2)
+  })
 
 })
