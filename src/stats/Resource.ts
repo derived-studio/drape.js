@@ -1,9 +1,10 @@
 import { BaseStatData, BaseStat } from "./BaseStat";
 import { IStat } from "../interfaces";
+import { Attribute } from "./Attribute";
 
 export type ResourceData = BaseStatData & {
-  output?: IStat
-  capacity?: IStat
+  output?: IStat | number
+  capacity?: IStat | number
 }
 
 export class Resource extends BaseStat {
@@ -19,8 +20,8 @@ export class Resource extends BaseStat {
     code, name, base = 0, output, capacity
   }: ResourceData) {
     super({ code, name, base })
-    this._output = output
-    this._capacity = capacity
+    this._output = typeof output === 'number' ? new Attribute({ name: `${name} output`, base: output }) : output
+    this._capacity = typeof capacity === 'number' ? new Attribute({ name: `${name} capacity`, base: capacity }) : capacity
   }
 
   add(qty: number): number {
