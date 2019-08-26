@@ -1,10 +1,12 @@
 {
-    "compilerOptions": {
-        "module": "commonjs",
-        "target": "es6",
-        "lib": [
-            "dom", // todo: required by console log
-            "es7"
-        ]
-    }
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "lib": [
+      "dom", // todo: required by console log
+      "es2015",
+      "es2016",
+      "es2017"
+    ]
+  }
 }
